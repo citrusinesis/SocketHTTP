@@ -46,7 +46,7 @@ func handleConnection(conn net.Conn) {
 
 func getResponse(resource string) (response []byte) {
 	var header string
-	files := getFileList(".")
+	files := getFileList("./resource")
 
 	if !contains(files, resource[1:]) {
 		response = []byte(notFound)
@@ -63,7 +63,7 @@ func getResponse(resource string) (response []byte) {
 		header = html
 	}
 
-	file, err := os.ReadFile("." + resource)
+	file, err := os.ReadFile("./resource" + resource)
 	if err != nil {
 		panic(err)
 	}
@@ -74,7 +74,7 @@ func getResponse(resource string) (response []byte) {
 }
 
 func getFileList(dirPath string) (list []string) {
-	files, err := os.ReadDir(".")
+	files, err := os.ReadDir(dirPath)
 	if err != nil {
 		panic(err)
 	}
